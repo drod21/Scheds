@@ -1,6 +1,6 @@
 import type { Session } from '@supabase/supabase-js'
 import Account from '../components/account'
-import { supabase } from '../utils/supabase-client'
+import enforceAuthenticated from '../utils/auth'
 
 
 export default function Home({ session }: { session: Session }) {
@@ -9,12 +9,4 @@ export default function Home({ session }: { session: Session }) {
   )
 }
 
-export async function getServerSideProps({ req }) {
-    const { user } = await supabase.auth.api.getUserByCookie(req);
-
-    if (!user) {
-        return { props: {}, redirect: { destination: '/login' } };
-    }
-
-    return { props: {} };
-}
+export const getServerSideProps = enforceAuthenticated()
