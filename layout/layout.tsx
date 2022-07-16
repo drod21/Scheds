@@ -3,7 +3,7 @@ import type { Session } from '@supabase/supabase-js';
 
 export default function Layout({ children, session }: { children: React.ReactNode, session: Session }) {
     return (
-        <MantineProvider>
+        <MantineProvider theme={{ colorScheme: 'dark' }}>
             <AppShell
                 padding="md"
                 navbar={<Navbar width={{ base: 300 }} height={500} p="xs"><Navbar.Section>1</Navbar.Section></Navbar>}

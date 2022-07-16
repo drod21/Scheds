@@ -1,23 +1,20 @@
-import { useState, useEffect } from 'react'
-import { supabase } from '../utils/supabase-client'
-import Auth from '../components/auth'
+import type { Session } from '@supabase/supabase-js'
 import Account from '../components/account'
-import Layout from '../layout'
+import { supabase } from '../utils/supabase-client'
 
-export default function Home() {
-  const [session, setSession] = useState(null)
 
-  useEffect(() => {
-    setSession(supabase.auth.session())
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
-
+export default function Home({ session }: { session: Session }) {
   return (
-    <Layout session={session}>
-      {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
-    </Layout>
+      <Account key={session.user.id} session={session} />
   )
+}
+
+export async function getServerSideProps({ req }) {
+    const { user } = await supabase.auth.api.getUserByCookie(req);
+
+    if (!user) {
+        return { props: {}, redirect: { destination: '/login' } };
+    }
+
+    return { props: {} };
 }
