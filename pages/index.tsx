@@ -1,12 +1,7 @@
-import type { Session } from '@supabase/supabase-js'
-import Account from '../components/account'
-import enforceAuthenticated from '../utils/auth'
 
 
-export default function Home({ session }: { session: Session }) {
+export default function Home(props) {
   return (
-      <Account key={session.user.id} session={session} />
+    <h1>Home</h1>
   )
 }
-
-export const getServerSideProps = enforceAuthenticated()
