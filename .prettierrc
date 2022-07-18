@@ -3,7 +3,7 @@
 	"bracketSpacing": true,
 	"jsxBracketSameLine": false,
 	"jsxSingleQuote": true,
-	"parser": "javascript",
+	"parser": "typescript",
 	"printWidth": 120,
 	"semi": false,
 	"singleQuote": true,
