@@ -20,15 +20,21 @@ function MyApp({ Component, pageProps }: AppProps & { session: Session }) {
 	const [authState, setAuthState] = useState<AuthState>(AuthStateEnum.Loading)
 	const props = { ...pageProps, session }
 
-	useEffect(() => {
-		const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-			updateSupabaseCookie(event, session)
+	const updateAuthState = (event) =>
+		setAuthState(() =>
 			match(event)
-				.with('SIGNED_IN', () => {
-					setAuthState(AuthStateEnum.Authenticated)
-				})
-				.with('SIGNED_OUT', () => setAuthState(AuthStateEnum.Unauthenticated))
-				.otherwise(() => setAuthState(AuthStateEnum.Loading))
+				.with('SIGNED_IN', () => AuthStateEnum.Authenticated)
+				.with('SIGNED_OUT', () => AuthStateEnum.Unauthenticated)
+				.otherwise(() => AuthStateEnum.Loading),
+		)
+
+	useEffect(() => {
+		setSession(supabase.auth.session())
+		const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+			await updateSupabaseCookie(event, session)
+			updateAuthState(event)
+			console.log(event)
+			setSession(session)
 		})
 
 		checkUser()
@@ -51,14 +57,6 @@ function MyApp({ Component, pageProps }: AppProps & { session: Session }) {
 		const user = supabase.auth.user()
 		setAuthState(() => (user ? AuthStateEnum.Authenticated : AuthStateEnum.Unauthenticated))
 	}
-
-	useEffect(() => {
-		setSession(supabase.auth.session())
-
-		supabase.auth.onAuthStateChange((_event, session) => {
-			setSession(session)
-		})
-	}, [])
 
 	return (
 		<Layout session={session} authState={authState}>

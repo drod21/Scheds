@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import enforceAuthenticated from '../utils/auth'
 import { supabase } from '../utils/supabase-client'
 
 export default function Account({ session }) {
@@ -80,5 +79,3 @@ export default function Account({ session }) {
 		</div>
 	)
 }
-
-export const getServerSideProps = enforceAuthenticated()

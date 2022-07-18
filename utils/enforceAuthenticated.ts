@@ -5,6 +5,8 @@ const enforceAuthenticated: (inner?: GetServerSideProps) => GetServerSideProps =
 	return async (context) => {
 		const { req } = context
 		const { user } = await supabase.auth.api.getUserByCookie(req)
+		console.log(req, user)
+
 		if (!user) {
 			return { props: {}, redirect: { destination: '/login', permanent: false } }
 		}
@@ -16,4 +18,4 @@ const enforceAuthenticated: (inner?: GetServerSideProps) => GetServerSideProps =
 	}
 }
 
-export default enforceAuthenticated
+export { enforceAuthenticated }

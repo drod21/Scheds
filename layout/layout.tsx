@@ -1,36 +1,38 @@
-import { AppShell, Button, Header, MantineProvider, Navbar } from '@mantine/core'
+import { useId } from 'react'
 import Link from 'next/link'
+import { AppShell, Button, Header, MantineProvider, Navbar } from '@mantine/core'
 import type { Session } from '@supabase/supabase-js'
 import { match } from 'ts-pattern'
 import { AuthState, AuthStateEnum } from '../pages/_app'
+import styles from './Layout.module.scss'
 
 type Props = { authState: AuthState; children: React.ReactNode; session: Session }
-const LoginLink = () => (
-	<Navbar.Section>
-		<Link href='/login'>
-			<Button component='a'>Login</Button>
+const buildLink = (name: string): JSX.Element => (
+	<Navbar.Section className={styles.link}>
+		<Link
+			href={match(name)
+				.with('Home', () => '/')
+				.otherwise(() => `/${name.toLowerCase()}`)}
+		>
+			<Button component='a'>{name}</Button>
 		</Link>
 	</Navbar.Section>
 )
-const LogoutLink = () => (
-	<Navbar.Section>
-		<Link href='/logout'>
-			<Button component='a'>Logout</Button>
-		</Link>
-	</Navbar.Section>
-)
-const ProfileLink = () => (
-	<Navbar.Section>
-		<Link href='/profile'>
-			<Button component='a'>Profile</Button>
-		</Link>
-	</Navbar.Section>
-)
+const LoginLink = () => buildLink('Login')
+const LogoutLink = () => buildLink('Logout')
+const ProfileLink = () => buildLink('Profile')
+const HomeLink = () => buildLink('Home')
+
 export default function Layout({ authState, children, session }: Props) {
+	const id = useId()
 	const links = [
-		match(authState)
-			.with(AuthStateEnum.Authenticated, () => [<ProfileLink key={1} />, <LogoutLink key={2} />])
-			.otherwise(() => <LoginLink />),
+		<HomeLink key={`${id}-home`} />,
+		...match(authState)
+			.with(AuthStateEnum.Authenticated, () => [
+				<ProfileLink key={`${id}-profile`} />,
+				<LogoutLink key={`${id}-logout`} />,
+			])
+			.otherwise(() => [<LoginLink key={`${id}-login`} />]),
 	]
 
 	return (
@@ -39,12 +41,12 @@ export default function Layout({ authState, children, session }: Props) {
 				padding='md'
 				navbar={
 					<Navbar width={{ base: 300 }} height={500} p='xs'>
-						<Navbar.Section>1</Navbar.Section>
+						{links.map((x) => x)}
 					</Navbar>
 				}
 				header={
 					<Header height={60} p='xs'>
-						{links.map((x) => x)}
+						Header
 					</Header>
 				}
 				styles={(theme) => ({
