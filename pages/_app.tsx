@@ -33,7 +33,6 @@ function MyApp({ Component, pageProps }: AppProps & { session: Session }) {
 		const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
 			await updateSupabaseCookie(event, session)
 			updateAuthState(event)
-			console.log(event)
 			setSession(session)
 		})
 
