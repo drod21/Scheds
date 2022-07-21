@@ -1,24 +1,24 @@
-import { useState } from 'react'
-import { Button, TextInput } from '@mantine/core'
-import { supabase } from '../../utils/supabase-client'
+import { useState } from 'react';
+import { Button, TextInput } from '@mantine/core';
+import { supabase } from '../../utils/supabase-client';
 
 export default function Login() {
-	const [loading, setLoading] = useState(false)
-	const [email, setEmail] = useState('')
+	const [loading, setLoading] = useState(false);
+	const [email, setEmail] = useState('');
 
 	const handleLogin = async (email: string) => {
 		try {
-			setLoading(true)
-			const { error } = await supabase.auth.signIn({ email })
-			if (error) throw error
-			alert('Check your email for the login link!')
+			setLoading(true);
+			const { error } = await supabase.auth.signIn({ email });
+			if (error) throw error;
+			alert('Check your email for the login link!');
 		} catch (error) {
-			const e = error as any
-			alert(e.error_description || e.message)
+			const e = error as any;
+			alert(e.error_description || e.message);
 		} finally {
-			setLoading(false)
+			setLoading(false);
 		}
-	}
+	};
 
 	return (
 		<div className='row flex flex-center'>
@@ -31,8 +31,8 @@ export default function Login() {
 				<div>
 					<Button
 						onClick={(e) => {
-							e.preventDefault()
-							handleLogin(email)
+							e.preventDefault();
+							handleLogin(email);
 						}}
 						disabled={loading}
 					>
@@ -41,5 +41,5 @@ export default function Login() {
 				</div>
 			</div>
 		</div>
-	)
+	);
 }

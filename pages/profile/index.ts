@@ -1,4 +1,4 @@
-import { withPageAuth } from '@supabase/supabase-auth-helpers/nextjs'
+import { withPageAuth } from '@supabase/supabase-auth-helpers/nextjs';
 
-export { default } from './profile'
-export const getServerSideProps = withPageAuth({ redirectTo: '/login' })
+export { default } from './profile';
+export const getServerSideProps = withPageAuth({ redirectTo: '/login' });

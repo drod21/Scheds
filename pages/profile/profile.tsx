@@ -1,58 +1,58 @@
-import { useEffect, useState } from 'react'
-import { Session } from '@supabase/supabase-js'
-import { supabase } from '../../utils/supabase-client'
+import { useEffect, useState } from 'react';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '../../utils/supabase-client';
 
 export default function Profile({ session }: { session: Session }) {
-	const [loading, setLoading] = useState(true)
-	const [username, setUsername] = useState(null)
+	const [loading, setLoading] = useState(true);
+	const [username, setUsername] = useState(null);
 
 	useEffect(() => {
-		getProfile()
-	}, [session])
+		getProfile();
+	}, [session]);
 
 	async function getProfile() {
 		try {
-			setLoading(true)
-			const user = supabase.auth.user()
+			setLoading(true);
+			const user = supabase.auth.user();
 
-			let { data, error, status } = await supabase.from('profiles').select(`username`).eq('id', user.id).single()
+			let { data, error, status } = await supabase.from('profiles').select(`username`).eq('id', user.id).single();
 
 			if (error && status !== 406) {
-				throw error
+				throw error;
 			}
 
 			if (data) {
-				setUsername(data.username)
+				setUsername(data.username);
 			}
 		} catch (error) {
-			alert(error.message)
+			alert(error.message);
 		} finally {
-			setLoading(false)
+			setLoading(false);
 		}
 	}
 
 	async function updateProfile({ username }) {
 		try {
-			setLoading(true)
-			const user = supabase.auth.user()
+			setLoading(true);
+			const user = supabase.auth.user();
 
 			const updates = {
 				id: user.id,
 				username,
 				updated_at: new Date(),
-			}
+			};
 
 			let { error } = await supabase.from('profiles').upsert(updates, {
 				returning: 'minimal', // Don't return the value after inserting
-			})
+			});
 
 			if (error) {
-				throw error
+				throw error;
 			}
 		} catch (error) {
-			alert(error.message)
+			alert(error.message);
 		} finally {
-			setLoading(false)
+			setLoading(false);
 		}
 	}
 
@@ -78,5 +78,5 @@ export default function Profile({ session }: { session: Session }) {
 				</button>
 			</div>
 		</div>
-	)
+	);
 }

@@ -1,12 +1,12 @@
-import { useId } from 'react'
-import Link from 'next/link'
-import { AppShell, Button, Header, MantineProvider, Navbar } from '@mantine/core'
-import type { Session } from '@supabase/supabase-js'
-import { match } from 'ts-pattern'
-import { AuthState, AuthStateEnum } from '../pages/_app'
-import styles from './Layout.module.scss'
+import { useId } from 'react';
+import Link from 'next/link';
+import { AppShell, Button, Header, MantineProvider, Navbar } from '@mantine/core';
+import type { Session } from '@supabase/supabase-js';
+import { match } from 'ts-pattern';
+import { AuthState, AuthStateEnum } from '../pages/_app';
+import styles from './Layout.module.scss';
 
-type Props = { authState: AuthState; children: React.ReactNode; session: Session }
+type Props = { authState: AuthState; children: React.ReactNode; session: Session };
 const buildLink = (name: string): JSX.Element => (
 	<Navbar.Section className={styles.link}>
 		<Link
@@ -17,14 +17,14 @@ const buildLink = (name: string): JSX.Element => (
 			<Button component='a'>{name}</Button>
 		</Link>
 	</Navbar.Section>
-)
-const LoginLink = () => buildLink('Login')
-const LogoutLink = () => buildLink('Logout')
-const ProfileLink = () => buildLink('Profile')
-const HomeLink = () => buildLink('Home')
+);
+const LoginLink = () => buildLink('Login');
+const LogoutLink = () => buildLink('Logout');
+const ProfileLink = () => buildLink('Profile');
+const HomeLink = () => buildLink('Home');
 
 export default function Layout({ authState, children, session }: Props) {
-	const id = useId()
+	const id = useId();
 	const links = [
 		<HomeLink key={`${id}-home`} />,
 		...match(authState)
@@ -33,7 +33,7 @@ export default function Layout({ authState, children, session }: Props) {
 				<LogoutLink key={`${id}-logout`} />,
 			])
 			.otherwise(() => [<LoginLink key={`${id}-login`} />]),
-	]
+	];
 
 	return (
 		<MantineProvider theme={{ colorScheme: 'dark' }}>
@@ -56,5 +56,5 @@ export default function Layout({ authState, children, session }: Props) {
 				{children}
 			</AppShell>
 		</MantineProvider>
-	)
+	);
 }
