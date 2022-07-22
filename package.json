@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-		"update-types": "npx openapi-typescript \"${SUPABASE_URL}/rest/v1/?apikey=${SUPABASE_ANON_KEY}\" --version=2 --output types/database/index.ts"
+    "update-types": "npx openapi-typescript \"${SUPABASE_URL}/rest/v1/?apikey=${SUPABASE_ANON_KEY}\" --version=2 --output types/database/index.ts"
   },
   "dependencies": {
     "@mantine/core": "^4.2.12",
@@ -22,6 +22,8 @@
     "dayjs": "^1.11.3",
     "next": "12.2.2",
     "react": "18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
     "sass": "^1.5.1",
     "ts-pattern": "^4.0.5"
