@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Session } from '@supabase/supabase-js';
 import { supabase } from '../../utils/supabase-client';
-import { TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
+import { TextInput, Button, Group, Box, Grid } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
 export default function Profile({ session }: { session: Session }) {
-	const form = useForm({ initialValues: { username: '' } });
+	const form = useForm({
+		initialValues: { firstName: '', lastName: '', username: '' },
+	});
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -24,7 +26,7 @@ export default function Profile({ session }: { session: Session }) {
 			}
 
 			if (data) {
-				form.setValues({ username: data.username });
+				form.setValues({ ...data });
 			}
 		} catch (error) {
 			alert(error.message);
@@ -33,13 +35,15 @@ export default function Profile({ session }: { session: Session }) {
 		}
 	}
 
-	async function updateProfile({ username }) {
+	async function updateProfile({ firstName, lastName, username }) {
 		try {
 			setLoading(true);
 			const user = supabase.auth.user();
 
 			const updates = {
+				firstName,
 				id: user.id,
+				lastName,
 				username,
 				updated_at: new Date(),
 			};
@@ -59,10 +63,30 @@ export default function Profile({ session }: { session: Session }) {
 	}
 
 	return (
-		<Box sx={{ maxWidth: 300 }} mx='auto'>
+		<Box sx={{ maxWidth: 500 }} mx='auto'>
 			<form onSubmit={form.onSubmit(updateProfile)}>
 				<Group position='apart'>
 					<TextInput label='Email' value={session.user.email} disabled />
+					<Grid>
+						<Grid.Col span={6}>
+							<TextInput
+								label='First Name'
+								placeholder='First name'
+								size='md'
+								{...form.getInputProps('firstName')}
+								required
+							/>
+						</Grid.Col>
+						<Grid.Col span={6}>
+							<TextInput
+								label='Last Name'
+								placeholder='Last name'
+								size='md'
+								{...form.getInputProps('lastName')}
+								required
+							/>
+						</Grid.Col>
+					</Grid>
 					<TextInput
 						label='Username'
 						placeholder='Please enter a username'
