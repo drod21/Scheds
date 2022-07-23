@@ -3,733 +3,726 @@
  * Do not make direct changes to the file.
  */
 
-export interface paths {
-  "/": {
-    get: {
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/tasks": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.tasks.id"];
-          name?: parameters["rowFilter.tasks.name"];
-          size?: parameters["rowFilter.tasks.size"];
-          user_id?: parameters["rowFilter.tasks.user_id"];
-          description?: parameters["rowFilter.tasks.description"];
-          status?: parameters["rowFilter.tasks.status"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["tasks"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** tasks */
-          tasks?: definitions["tasks"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.tasks.id"];
-          name?: parameters["rowFilter.tasks.name"];
-          size?: parameters["rowFilter.tasks.size"];
-          user_id?: parameters["rowFilter.tasks.user_id"];
-          description?: parameters["rowFilter.tasks.description"];
-          status?: parameters["rowFilter.tasks.status"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.tasks.id"];
-          name?: parameters["rowFilter.tasks.name"];
-          size?: parameters["rowFilter.tasks.size"];
-          user_id?: parameters["rowFilter.tasks.user_id"];
-          description?: parameters["rowFilter.tasks.description"];
-          status?: parameters["rowFilter.tasks.status"];
-        };
-        body: {
-          /** tasks */
-          tasks?: definitions["tasks"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/schedule": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.schedule.id"];
-          frequency_type?: parameters["rowFilter.schedule.frequency_type"];
-          frequency_interval?: parameters["rowFilter.schedule.frequency_interval"];
-          start_date?: parameters["rowFilter.schedule.start_date"];
-          end_date?: parameters["rowFilter.schedule.end_date"];
-          user_id?: parameters["rowFilter.schedule.user_id"];
-          time_preference?: parameters["rowFilter.schedule.time_preference"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["schedule"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** schedule */
-          schedule?: definitions["schedule"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.schedule.id"];
-          frequency_type?: parameters["rowFilter.schedule.frequency_type"];
-          frequency_interval?: parameters["rowFilter.schedule.frequency_interval"];
-          start_date?: parameters["rowFilter.schedule.start_date"];
-          end_date?: parameters["rowFilter.schedule.end_date"];
-          user_id?: parameters["rowFilter.schedule.user_id"];
-          time_preference?: parameters["rowFilter.schedule.time_preference"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.schedule.id"];
-          frequency_type?: parameters["rowFilter.schedule.frequency_type"];
-          frequency_interval?: parameters["rowFilter.schedule.frequency_interval"];
-          start_date?: parameters["rowFilter.schedule.start_date"];
-          end_date?: parameters["rowFilter.schedule.end_date"];
-          user_id?: parameters["rowFilter.schedule.user_id"];
-          time_preference?: parameters["rowFilter.schedule.time_preference"];
-        };
-        body: {
-          /** schedule */
-          schedule?: definitions["schedule"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/profiles": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.profiles.id"];
-          first_name?: parameters["rowFilter.profiles.first_name"];
-          last_name?: parameters["rowFilter.profiles.last_name"];
-          username?: parameters["rowFilter.profiles.username"];
-          updated_at?: parameters["rowFilter.profiles.updated_at"];
-          email?: parameters["rowFilter.profiles.email"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["profiles"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** profiles */
-          profiles?: definitions["profiles"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.profiles.id"];
-          first_name?: parameters["rowFilter.profiles.first_name"];
-          last_name?: parameters["rowFilter.profiles.last_name"];
-          username?: parameters["rowFilter.profiles.username"];
-          updated_at?: parameters["rowFilter.profiles.updated_at"];
-          email?: parameters["rowFilter.profiles.email"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.profiles.id"];
-          first_name?: parameters["rowFilter.profiles.first_name"];
-          last_name?: parameters["rowFilter.profiles.last_name"];
-          username?: parameters["rowFilter.profiles.username"];
-          updated_at?: parameters["rowFilter.profiles.updated_at"];
-          email?: parameters["rowFilter.profiles.email"];
-        };
-        body: {
-          /** profiles */
-          profiles?: definitions["profiles"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/energy_tasks": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.energy_tasks.id"];
-          energy_id?: parameters["rowFilter.energy_tasks.energy_id"];
-          task_id?: parameters["rowFilter.energy_tasks.task_id"];
-          schedule_id?: parameters["rowFilter.energy_tasks.schedule_id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["energy_tasks"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** energy_tasks */
-          energy_tasks?: definitions["energy_tasks"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.energy_tasks.id"];
-          energy_id?: parameters["rowFilter.energy_tasks.energy_id"];
-          task_id?: parameters["rowFilter.energy_tasks.task_id"];
-          schedule_id?: parameters["rowFilter.energy_tasks.schedule_id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.energy_tasks.id"];
-          energy_id?: parameters["rowFilter.energy_tasks.energy_id"];
-          task_id?: parameters["rowFilter.energy_tasks.task_id"];
-          schedule_id?: parameters["rowFilter.energy_tasks.schedule_id"];
-        };
-        body: {
-          /** energy_tasks */
-          energy_tasks?: definitions["energy_tasks"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/energy": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.energy.id"];
-          size?: parameters["rowFilter.energy.size"];
-          created_at?: parameters["rowFilter.energy.created_at"];
-          user_id?: parameters["rowFilter.energy.user_id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["energy"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** energy */
-          energy?: definitions["energy"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.energy.id"];
-          size?: parameters["rowFilter.energy.size"];
-          created_at?: parameters["rowFilter.energy.created_at"];
-          user_id?: parameters["rowFilter.energy.user_id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.energy.id"];
-          size?: parameters["rowFilter.energy.size"];
-          created_at?: parameters["rowFilter.energy.created_at"];
-          user_id?: parameters["rowFilter.energy.user_id"];
-        };
-        body: {
-          /** energy */
-          energy?: definitions["energy"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
+export interface Paths {
+	'/': {
+		get: {
+			responses: {
+				/** OK */
+				200: unknown;
+			};
+		};
+	};
+	'/tasks': {
+		get: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.tasks.id'];
+					name?: Parameters['rowFilter.tasks.name'];
+					size?: Parameters['rowFilter.tasks.size'];
+					user_id?: Parameters['rowFilter.tasks.user_id'];
+					description?: Parameters['rowFilter.tasks.description'];
+					status?: Parameters['rowFilter.tasks.status'];
+					/** Filtering Columns */
+					select?: Parameters['select'];
+					/** Ordering */
+					order?: Parameters['order'];
+					/** Limiting and Pagination */
+					offset?: Parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: Parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: Parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: Parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: Parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: Definitions['tasks'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			Parameters: {
+				body: {
+					/** tasks */
+					tasks?: Definitions['tasks'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: Parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.tasks.id'];
+					name?: Parameters['rowFilter.tasks.name'];
+					size?: Parameters['rowFilter.tasks.size'];
+					user_id?: Parameters['rowFilter.tasks.user_id'];
+					description?: Parameters['rowFilter.tasks.description'];
+					status?: Parameters['rowFilter.tasks.status'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.tasks.id'];
+					name?: Parameters['rowFilter.tasks.name'];
+					size?: Parameters['rowFilter.tasks.size'];
+					user_id?: Parameters['rowFilter.tasks.user_id'];
+					description?: Parameters['rowFilter.tasks.description'];
+					status?: Parameters['rowFilter.tasks.status'];
+				};
+				body: {
+					/** tasks */
+					tasks?: Definitions['tasks'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/schedule': {
+		get: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.schedule.id'];
+					frequency_type?: Parameters['rowFilter.schedule.frequency_type'];
+					frequency_interval?: Parameters['rowFilter.schedule.frequency_interval'];
+					start_date?: Parameters['rowFilter.schedule.start_date'];
+					end_date?: Parameters['rowFilter.schedule.end_date'];
+					user_id?: Parameters['rowFilter.schedule.user_id'];
+					time_preference?: Parameters['rowFilter.schedule.time_preference'];
+					/** Filtering Columns */
+					select?: Parameters['select'];
+					/** Ordering */
+					order?: Parameters['order'];
+					/** Limiting and Pagination */
+					offset?: Parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: Parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: Parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: Parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: Parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: Definitions['schedule'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			Parameters: {
+				body: {
+					/** schedule */
+					schedule?: Definitions['schedule'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: Parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.schedule.id'];
+					frequency_type?: Parameters['rowFilter.schedule.frequency_type'];
+					frequency_interval?: Parameters['rowFilter.schedule.frequency_interval'];
+					start_date?: Parameters['rowFilter.schedule.start_date'];
+					end_date?: Parameters['rowFilter.schedule.end_date'];
+					user_id?: Parameters['rowFilter.schedule.user_id'];
+					time_preference?: Parameters['rowFilter.schedule.time_preference'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.schedule.id'];
+					frequency_type?: Parameters['rowFilter.schedule.frequency_type'];
+					frequency_interval?: Parameters['rowFilter.schedule.frequency_interval'];
+					start_date?: Parameters['rowFilter.schedule.start_date'];
+					end_date?: Parameters['rowFilter.schedule.end_date'];
+					user_id?: Parameters['rowFilter.schedule.user_id'];
+					time_preference?: Parameters['rowFilter.schedule.time_preference'];
+				};
+				body: {
+					/** schedule */
+					schedule?: Definitions['schedule'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/profiles': {
+		get: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.profiles.id'];
+					first_name?: Parameters['rowFilter.profiles.first_name'];
+					last_name?: Parameters['rowFilter.profiles.last_name'];
+					username?: Parameters['rowFilter.profiles.username'];
+					updated_at?: Parameters['rowFilter.profiles.updated_at'];
+					email?: Parameters['rowFilter.profiles.email'];
+					/** Filtering Columns */
+					select?: Parameters['select'];
+					/** Ordering */
+					order?: Parameters['order'];
+					/** Limiting and Pagination */
+					offset?: Parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: Parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: Parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: Parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: Parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: Definitions['profiles'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			Parameters: {
+				body: {
+					/** profiles */
+					profiles?: Definitions['profiles'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: Parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.profiles.id'];
+					first_name?: Parameters['rowFilter.profiles.first_name'];
+					last_name?: Parameters['rowFilter.profiles.last_name'];
+					username?: Parameters['rowFilter.profiles.username'];
+					updated_at?: Parameters['rowFilter.profiles.updated_at'];
+					email?: Parameters['rowFilter.profiles.email'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.profiles.id'];
+					first_name?: Parameters['rowFilter.profiles.first_name'];
+					last_name?: Parameters['rowFilter.profiles.last_name'];
+					username?: Parameters['rowFilter.profiles.username'];
+					updated_at?: Parameters['rowFilter.profiles.updated_at'];
+					email?: Parameters['rowFilter.profiles.email'];
+				};
+				body: {
+					/** profiles */
+					profiles?: Definitions['profiles'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/energy_tasks': {
+		get: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.energy_tasks.id'];
+					energy_id?: Parameters['rowFilter.energy_tasks.energy_id'];
+					task_id?: Parameters['rowFilter.energy_tasks.task_id'];
+					schedule_id?: Parameters['rowFilter.energy_tasks.schedule_id'];
+					/** Filtering Columns */
+					select?: Parameters['select'];
+					/** Ordering */
+					order?: Parameters['order'];
+					/** Limiting and Pagination */
+					offset?: Parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: Parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: Parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: Parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: Parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: Definitions['energy_tasks'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			Parameters: {
+				body: {
+					/** energy_tasks */
+					energy_tasks?: Definitions['energy_tasks'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: Parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.energy_tasks.id'];
+					energy_id?: Parameters['rowFilter.energy_tasks.energy_id'];
+					task_id?: Parameters['rowFilter.energy_tasks.task_id'];
+					schedule_id?: Parameters['rowFilter.energy_tasks.schedule_id'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.energy_tasks.id'];
+					energy_id?: Parameters['rowFilter.energy_tasks.energy_id'];
+					task_id?: Parameters['rowFilter.energy_tasks.task_id'];
+					schedule_id?: Parameters['rowFilter.energy_tasks.schedule_id'];
+				};
+				body: {
+					/** energy_tasks */
+					energy_tasks?: Definitions['energy_tasks'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/energy': {
+		get: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.energy.id'];
+					size?: Parameters['rowFilter.energy.size'];
+					created_at?: Parameters['rowFilter.energy.created_at'];
+					user_id?: Parameters['rowFilter.energy.user_id'];
+					/** Filtering Columns */
+					select?: Parameters['select'];
+					/** Ordering */
+					order?: Parameters['order'];
+					/** Limiting and Pagination */
+					offset?: Parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: Parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: Parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: Parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: Parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: Definitions['energy'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			Parameters: {
+				body: {
+					/** energy */
+					energy?: Definitions['energy'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: Parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.energy.id'];
+					size?: Parameters['rowFilter.energy.size'];
+					created_at?: Parameters['rowFilter.energy.created_at'];
+					user_id?: Parameters['rowFilter.energy.user_id'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			Parameters: {
+				query: {
+					id?: Parameters['rowFilter.energy.id'];
+					size?: Parameters['rowFilter.energy.size'];
+					created_at?: Parameters['rowFilter.energy.created_at'];
+					user_id?: Parameters['rowFilter.energy.user_id'];
+				};
+				body: {
+					/** energy */
+					energy?: Definitions['energy'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: Parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
 }
 
-export interface definitions {
-  tasks: {
-    /**
-     * Format: integer
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /** Format: character varying */
-    name?: string;
-    /**
-     * Format: public."Size"
-     * @enum {string}
-     */
-    size?: "small" | "medium" | "large";
-    /** Format: uuid */
-    user_id?: string;
-    /** Format: character varying */
-    description?: string;
-    /** Format: character varying */
-    status?: string;
-  };
-  schedule: {
-    /**
-     * Format: integer
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /** Format: character varying */
-    frequency_type?: string;
-    /**
-     * Format: public."FrequencyInterval"
-     * @enum {string}
-     */
-    frequency_interval?:
-      | "anually"
-      | "daily"
-      | "weekday"
-      | "weekly"
-      | "biweekly"
-      | "bimonthly"
-      | "monthly";
-    /** Format: timestamp without time zone */
-    start_date?: string;
-    /** Format: timestamp without time zone */
-    end_date?: string;
-    /** Format: uuid */
-    user_id?: string;
-    /**
-     * Format: public."TimePreference"
-     * @enum {string}
-     */
-    time_preference?: "morning" | "afternoon" | "evening";
-  };
-  profiles: {
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: string;
-    /** Format: text */
-    first_name?: string;
-    /** Format: text */
-    last_name?: string;
-    /** Format: character varying */
-    username?: string;
-    /** Format: timestamp without time zone */
-    updated_at?: string;
-    /** Format: character varying */
-    email?: string;
-  };
-  energy_tasks: {
-    /**
-     * Format: integer
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /**
-     * Format: integer
-     * @description Note:
-     * This is a Foreign Key to `energy.id`.<fk table='energy' column='id'/>
-     */
-    energy_id?: number;
-    /**
-     * Format: integer
-     * @description Note:
-     * This is a Foreign Key to `tasks.id`.<fk table='tasks' column='id'/>
-     */
-    task_id?: number;
-    /**
-     * Format: integer
-     * @description Note:
-     * This is a Foreign Key to `schedule.id`.<fk table='schedule' column='id'/>
-     */
-    schedule_id?: number;
-  };
-  energy: {
-    /**
-     * Format: integer
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /**
-     * Format: public."Size"
-     * @enum {string}
-     */
-    size?: "small" | "medium" | "large";
-    /** Format: timestamp without time zone */
-    created_at?: string;
-    /** Format: uuid */
-    user_id?: string;
-  };
+export interface Definitions {
+	tasks: {
+		/**
+		 * Format: integer
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/** Format: character varying */
+		name?: string;
+		/**
+		 * Format: public."Size"
+		 * @enum {string}
+		 */
+		size?: 'small' | 'medium' | 'large';
+		/** Format: uuid */
+		user_id?: string;
+		/** Format: character varying */
+		description?: string;
+		/** Format: character varying */
+		status?: string;
+	};
+	schedule: {
+		/**
+		 * Format: integer
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/** Format: character varying */
+		frequency_type?: string;
+		/**
+		 * Format: public."FrequencyInterval"
+		 * @enum {string}
+		 */
+		frequency_interval?: 'anually' | 'daily' | 'weekday' | 'weekly' | 'biweekly' | 'bimonthly' | 'monthly';
+		/** Format: timestamp without time zone */
+		start_date?: string;
+		/** Format: timestamp without time zone */
+		end_date?: string;
+		/** Format: uuid */
+		user_id?: string;
+		/**
+		 * Format: public."TimePreference"
+		 * @enum {string}
+		 */
+		time_preference?: 'morning' | 'afternoon' | 'evening';
+	};
+	profiles: {
+		/**
+		 * Format: uuid
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: string;
+		/** Format: text */
+		first_name?: string;
+		/** Format: text */
+		last_name?: string;
+		/** Format: character varying */
+		username?: string;
+		/** Format: timestamp without time zone */
+		updated_at?: string;
+		/** Format: character varying */
+		email?: string;
+	};
+	energy_tasks: {
+		/**
+		 * Format: integer
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: integer
+		 * @description Note:
+		 * This is a Foreign Key to `energy.id`.<fk table='energy' column='id'/>
+		 */
+		energy_id?: number;
+		/**
+		 * Format: integer
+		 * @description Note:
+		 * This is a Foreign Key to `tasks.id`.<fk table='tasks' column='id'/>
+		 */
+		task_id?: number;
+		/**
+		 * Format: integer
+		 * @description Note:
+		 * This is a Foreign Key to `schedule.id`.<fk table='schedule' column='id'/>
+		 */
+		schedule_id?: number;
+	};
+	energy: {
+		/**
+		 * Format: integer
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: public."Size"
+		 * @enum {string}
+		 */
+		size?: 'small' | 'medium' | 'large';
+		/** Format: timestamp without time zone */
+		created_at?: string;
+		/** Format: uuid */
+		user_id?: string;
+	};
 }
 
-export interface parameters {
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferParams: "params=single-object";
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferReturn: "return=representation" | "return=minimal" | "return=none";
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferCount: "count=none";
-  /** @description Filtering Columns */
-  select: string;
-  /** @description On Conflict */
-  on_conflict: string;
-  /** @description Ordering */
-  order: string;
-  /** @description Limiting and Pagination */
-  range: string;
-  /**
-   * @description Limiting and Pagination
-   * @default items
-   */
-  rangeUnit: string;
-  /** @description Limiting and Pagination */
-  offset: string;
-  /** @description Limiting and Pagination */
-  limit: string;
-  /** @description tasks */
-  "body.tasks": definitions["tasks"];
-  /** Format: integer */
-  "rowFilter.tasks.id": string;
-  /** Format: character varying */
-  "rowFilter.tasks.name": string;
-  /** Format: public."Size" */
-  "rowFilter.tasks.size": string;
-  /** Format: uuid */
-  "rowFilter.tasks.user_id": string;
-  /** Format: character varying */
-  "rowFilter.tasks.description": string;
-  /** Format: character varying */
-  "rowFilter.tasks.status": string;
-  /** @description schedule */
-  "body.schedule": definitions["schedule"];
-  /** Format: integer */
-  "rowFilter.schedule.id": string;
-  /** Format: character varying */
-  "rowFilter.schedule.frequency_type": string;
-  /** Format: public."FrequencyInterval" */
-  "rowFilter.schedule.frequency_interval": string;
-  /** Format: timestamp without time zone */
-  "rowFilter.schedule.start_date": string;
-  /** Format: timestamp without time zone */
-  "rowFilter.schedule.end_date": string;
-  /** Format: uuid */
-  "rowFilter.schedule.user_id": string;
-  /** Format: public."TimePreference" */
-  "rowFilter.schedule.time_preference": string;
-  /** @description profiles */
-  "body.profiles": definitions["profiles"];
-  /** Format: uuid */
-  "rowFilter.profiles.id": string;
-  /** Format: text */
-  "rowFilter.profiles.first_name": string;
-  /** Format: text */
-  "rowFilter.profiles.last_name": string;
-  /** Format: character varying */
-  "rowFilter.profiles.username": string;
-  /** Format: timestamp without time zone */
-  "rowFilter.profiles.updated_at": string;
-  /** Format: character varying */
-  "rowFilter.profiles.email": string;
-  /** @description energy_tasks */
-  "body.energy_tasks": definitions["energy_tasks"];
-  /** Format: integer */
-  "rowFilter.energy_tasks.id": string;
-  /** Format: integer */
-  "rowFilter.energy_tasks.energy_id": string;
-  /** Format: integer */
-  "rowFilter.energy_tasks.task_id": string;
-  /** Format: integer */
-  "rowFilter.energy_tasks.schedule_id": string;
-  /** @description energy */
-  "body.energy": definitions["energy"];
-  /** Format: integer */
-  "rowFilter.energy.id": string;
-  /** Format: public."Size" */
-  "rowFilter.energy.size": string;
-  /** Format: timestamp without time zone */
-  "rowFilter.energy.created_at": string;
-  /** Format: uuid */
-  "rowFilter.energy.user_id": string;
+export interface Parameters {
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferParams: 'params=single-object';
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferReturn: 'return=representation' | 'return=minimal' | 'return=none';
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferCount: 'count=none';
+	/** @description Filtering Columns */
+	select: string;
+	/** @description On Conflict */
+	on_conflict: string;
+	/** @description Ordering */
+	order: string;
+	/** @description Limiting and Pagination */
+	range: string;
+	/**
+	 * @description Limiting and Pagination
+	 * @default items
+	 */
+	rangeUnit: string;
+	/** @description Limiting and Pagination */
+	offset: string;
+	/** @description Limiting and Pagination */
+	limit: string;
+	/** @description tasks */
+	'body.tasks': Definitions['tasks'];
+	/** Format: integer */
+	'rowFilter.tasks.id': string;
+	/** Format: character varying */
+	'rowFilter.tasks.name': string;
+	/** Format: public."Size" */
+	'rowFilter.tasks.size': string;
+	/** Format: uuid */
+	'rowFilter.tasks.user_id': string;
+	/** Format: character varying */
+	'rowFilter.tasks.description': string;
+	/** Format: character varying */
+	'rowFilter.tasks.status': string;
+	/** @description schedule */
+	'body.schedule': Definitions['schedule'];
+	/** Format: integer */
+	'rowFilter.schedule.id': string;
+	/** Format: character varying */
+	'rowFilter.schedule.frequency_type': string;
+	/** Format: public."FrequencyInterval" */
+	'rowFilter.schedule.frequency_interval': string;
+	/** Format: timestamp without time zone */
+	'rowFilter.schedule.start_date': string;
+	/** Format: timestamp without time zone */
+	'rowFilter.schedule.end_date': string;
+	/** Format: uuid */
+	'rowFilter.schedule.user_id': string;
+	/** Format: public."TimePreference" */
+	'rowFilter.schedule.time_preference': string;
+	/** @description profiles */
+	'body.profiles': Definitions['profiles'];
+	/** Format: uuid */
+	'rowFilter.profiles.id': string;
+	/** Format: text */
+	'rowFilter.profiles.first_name': string;
+	/** Format: text */
+	'rowFilter.profiles.last_name': string;
+	/** Format: character varying */
+	'rowFilter.profiles.username': string;
+	/** Format: timestamp without time zone */
+	'rowFilter.profiles.updated_at': string;
+	/** Format: character varying */
+	'rowFilter.profiles.email': string;
+	/** @description energy_tasks */
+	'body.energy_tasks': Definitions['energy_tasks'];
+	/** Format: integer */
+	'rowFilter.energy_tasks.id': string;
+	/** Format: integer */
+	'rowFilter.energy_tasks.energy_id': string;
+	/** Format: integer */
+	'rowFilter.energy_tasks.task_id': string;
+	/** Format: integer */
+	'rowFilter.energy_tasks.schedule_id': string;
+	/** @description energy */
+	'body.energy': Definitions['energy'];
+	/** Format: integer */
+	'rowFilter.energy.id': string;
+	/** Format: public."Size" */
+	'rowFilter.energy.size': string;
+	/** Format: timestamp without time zone */
+	'rowFilter.energy.created_at': string;
+	/** Format: uuid */
+	'rowFilter.energy.user_id': string;
 }
 
 export interface operations {}
