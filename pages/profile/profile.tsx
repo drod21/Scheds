@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Session } from '@supabase/supabase-js';
 import { supabase } from '../../utils/supabase-client';
+import { TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
+import { useForm } from '@mantine/form';
 
 export default function Profile({ session }: { session: Session }) {
+	const form = useForm({ initialValues: { username: '' } });
 	const [loading, setLoading] = useState(true);
-	const [username, setUsername] = useState(null);
 
 	useEffect(() => {
 		getProfile();
@@ -22,7 +24,7 @@ export default function Profile({ session }: { session: Session }) {
 			}
 
 			if (data) {
-				setUsername(data.username);
+				form.setValues({ username: data.username });
 			}
 		} catch (error) {
 			alert(error.message);
@@ -57,26 +59,23 @@ export default function Profile({ session }: { session: Session }) {
 	}
 
 	return (
-		<div className='form-widget'>
-			<div>
-				<label htmlFor='email'>Email</label>
-				<input id='email' type='text' value={session?.user?.email} disabled />
-			</div>
-			<div>
-				<label htmlFor='username'>Name</label>
-				<input id='username' type='text' value={username || ''} onChange={(e) => setUsername(e.target.value)} />
-			</div>
-			<div>
-				<button className='button block primary' onClick={() => updateProfile({ username })} disabled={loading}>
-					{loading ? 'Loading ...' : 'Update'}
-				</button>
-			</div>
-
-			<div>
-				<button className='button block' onClick={() => supabase.auth.signOut()}>
-					Sign Out
-				</button>
-			</div>
-		</div>
+		<Box sx={{ maxWidth: 300 }} mx='auto'>
+			<form onSubmit={form.onSubmit(updateProfile)}>
+				<Group position='apart'>
+					<TextInput label='Email' value={session.user.email} disabled />
+					<TextInput
+						label='Username'
+						placeholder='Please enter a username'
+						{...form.getInputProps('username')}
+						required
+					/>
+				</Group>
+				<Group position='right'>
+					<Button type='submit' disabled={loading}>
+						{loading ? 'Loading ...' : 'Update'}
+					</Button>
+				</Group>
+			</form>
+		</Box>
 	);
 }
