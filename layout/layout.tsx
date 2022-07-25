@@ -2,7 +2,6 @@ import { useId, useState } from 'react';
 import Link from 'next/link';
 import {
 	AppShell,
-	Aside,
 	Burger,
 	Button,
 	Footer,
@@ -10,7 +9,6 @@ import {
 	MantineProvider,
 	MediaQuery,
 	Navbar,
-	Text,
 	useMantineTheme,
 } from '@mantine/core';
 import type { Session } from '@supabase/supabase-js';
@@ -55,7 +53,7 @@ export default function Layout({ authState, children, session }: Props) {
 	];
 
 	return (
-		<MantineProvider>
+		<MantineProvider withGlobalStyles withNormalizeCSS>
 			<AppShell
 				styles={{
 					main: {
@@ -67,7 +65,7 @@ export default function Layout({ authState, children, session }: Props) {
 				fixed
 				navbar={
 					<Navbar p='md' hiddenBreakpoint='sm' hidden={!opened} width={{ sm: 200, lg: 300 }}>
-						{links.map((x) => x)}
+						{links.map(x => x)}
 					</Navbar>
 				}
 				footer={
@@ -81,7 +79,7 @@ export default function Layout({ authState, children, session }: Props) {
 							<MediaQuery largerThan='sm' styles={{ display: 'none' }}>
 								<Burger
 									opened={opened}
-									onClick={() => setOpened((o) => !o)}
+									onClick={() => setOpened(o => !o)}
 									size='sm'
 									color={theme.colors.gray[6]}
 									mr='xl'
