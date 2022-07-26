@@ -10,7 +10,7 @@ interface Props {
 	title?: string;
 }
 
-export default function Card({ actions, badge, children, image, onClick, title }: Props) {
+export default function Card({ actions, badge, children, image, onClick, subtitle, title }: Props) {
 	const theme = useMantineTheme();
 	const secondaryColor = theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7];
 
@@ -27,6 +27,7 @@ export default function Card({ actions, badge, children, image, onClick, title }
 						{badge}
 					</Badge>
 				</Group>
+				<Text size='md'>{subtitle}</Text>
 
 				<Text size='sm' style={{ color: secondaryColor, lineHeight: 1.5 }}>
 					{children}

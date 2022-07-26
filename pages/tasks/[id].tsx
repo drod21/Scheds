@@ -14,7 +14,7 @@ const statusOptions = [
 	{ label: 'In Progress', value: Status.InProgress },
 	{ label: 'Completed', value: Status.Completed },
 ];
-const sizes = [Size.Small, Size.Medium, Size.Large];
+const sizes = Object.values(Size);
 
 enum Actions {
 	SetName = 'setName',

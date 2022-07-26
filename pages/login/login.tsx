@@ -26,11 +26,11 @@ export default function Login() {
 				<h1 className='header'>Supabase + Next.js</h1>
 				<p className='description'>Sign in via magic link with your email below</p>
 				<div>
-					<TextInput type='email' placeholder='Your email' value={email} onChange={(e) => setEmail(e.target.value)} />
+					<TextInput type='email' placeholder='Your email' value={email} onChange={e => setEmail(e.target.value)} />
 				</div>
 				<div>
 					<Button
-						onClick={(e) => {
+						onClick={e => {
 							e.preventDefault();
 							handleLogin(email);
 						}}
