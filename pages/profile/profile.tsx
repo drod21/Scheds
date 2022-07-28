@@ -22,14 +22,18 @@ export default function Profile({ session }: { session: Session }) {
 				throw new Error('User not found');
 			}
 
-			let { data, error, status } = await supabase.from('profiles').select(`username`).eq('id', user.id).single();
+			let { data, error, status } = await supabase
+				.from('profiles')
+				.select('first_name, last_name, username')
+				.eq('id', user.id)
+				.single();
 
 			if (error && status !== 406) {
 				throw error;
 			}
 
 			if (data) {
-				form.setValues({ ...data });
+				form.setValues({ ...data, firstName: data.first_name, lastName: data.last_name });
 			}
 		} catch (error) {
 			alert(error.message);
@@ -47,9 +51,9 @@ export default function Profile({ session }: { session: Session }) {
 			}
 
 			const updates = {
-				firstName,
+				first_name: firstName,
 				id: user.id,
-				lastName,
+				last_name: lastName,
 				username,
 				updated_at: new Date(),
 			};
