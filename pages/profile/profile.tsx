@@ -18,6 +18,9 @@ export default function Profile({ session }: { session: Session }) {
 		try {
 			setLoading(true);
 			const user = supabase.auth.user();
+			if (!user) {
+				throw new Error('User not found');
+			}
 
 			let { data, error, status } = await supabase.from('profiles').select(`username`).eq('id', user.id).single();
 
@@ -39,6 +42,9 @@ export default function Profile({ session }: { session: Session }) {
 		try {
 			setLoading(true);
 			const user = supabase.auth.user();
+			if (!user) {
+				throw new Error('User not found');
+			}
 
 			const updates = {
 				firstName,
@@ -66,7 +72,7 @@ export default function Profile({ session }: { session: Session }) {
 		<Box sx={{ maxWidth: 500 }} mx='auto'>
 			<form onSubmit={form.onSubmit(updateProfile)}>
 				<Group position='apart'>
-					<TextInput label='Email' value={session.user.email} disabled />
+					<TextInput label='Email' value={session?.user?.email ?? ''} disabled />
 					<Grid>
 						<Grid.Col span={6}>
 							<TextInput
