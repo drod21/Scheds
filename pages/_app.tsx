@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps & { session: Session }) {
 	const [authState, setAuthState] = useState<AuthState>(AuthStateEnum.Loading);
 	const props = { ...pageProps, session };
 
-	const updateAuthState = (event) =>
+	const updateAuthState = event =>
 		setAuthState(() =>
 			match(event)
 				.with('SIGNED_IN', () => AuthStateEnum.Authenticated)
@@ -58,8 +58,8 @@ function MyApp({ Component, pageProps }: AppProps & { session: Session }) {
 	}
 
 	return (
-		<Layout session={session} authState={authState}>
-			<Component {...props} />
+		<Layout authState={authState}>
+			<Component session={session} {...props} />
 		</Layout>
 	);
 }

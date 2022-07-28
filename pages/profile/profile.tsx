@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Session } from '@supabase/supabase-js';
-import { supabase } from '../../utils/supabase-client';
 import { TextInput, Button, Group, Box, Grid } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { supabase } from '../../utils/supabase-client';
+import type { Session } from '@supabase/supabase-js';
 
-export default function Profile() {
-	const session = supabase.auth.session();
+export default function Profile({ session }: { session: Session }) {
 	const form = useForm({
 		initialValues: { firstName: '', lastName: '', username: '' },
 	});

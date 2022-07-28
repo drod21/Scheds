@@ -11,12 +11,12 @@ import {
 	Navbar,
 	useMantineTheme,
 } from '@mantine/core';
-import type { Session } from '@supabase/supabase-js';
 import { match } from 'ts-pattern';
 import { AuthState, AuthStateEnum } from '../pages/_app';
 import styles from './Layout.module.scss';
 
-type Props = { authState: AuthState; children: React.ReactNode; session: Session };
+type Props = { authState: AuthState; children: React.ReactNode };
+
 const buildLink = (name: string, onClick): JSX.Element => (
 	<Navbar.Section className={styles.link} onClick={onClick}>
 		<Link
@@ -35,8 +35,9 @@ const LogoutLink = ({ onClick }: { onClick; key }) => buildLink('Logout', onClic
 const ProfileLink = ({ onClick }: { onClick; key }) => buildLink('Profile', onClick);
 const HomeLink = ({ onClick }: { onClick; key }) => buildLink('Home', onClick);
 const TasksLink = ({ onClick }: { onClick; key }) => buildLink('Tasks', onClick);
+const BucketsLink = ({ onClick }: { onClick; key }) => buildLink('Buckets', onClick);
 
-export default function Layout({ authState, children, session }: Props) {
+export default function Layout({ authState, children }: Props) {
 	const theme = useMantineTheme();
 	const [opened, setOpened] = useState(false);
 	const closeIfOpened = () => opened && setOpened(false);
@@ -47,6 +48,7 @@ export default function Layout({ authState, children, session }: Props) {
 			.with(AuthStateEnum.Authenticated, () => [
 				<ProfileLink key={`${id}-profile`} onClick={closeIfOpened} />,
 				<TasksLink key={`${id}-tasks`} onClick={closeIfOpened} />,
+				<BucketsLink key={`${id}-buckets`} onClick={closeIfOpened} />,
 				<LogoutLink key={`${id}-logout`} onClick={closeIfOpened} />,
 			])
 			.otherwise(() => [<LoginLink key={`${id}-login`} onClick={closeIfOpened} />]),
