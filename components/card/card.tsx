@@ -1,5 +1,5 @@
-import { Card as MantineCard, Image, Text, Badge, Button, Group, useMantineTheme } from '@mantine/core';
-
+import { Card as MantineCard, Image, Text, Badge, Group, useMantineTheme } from '@mantine/core';
+import styles from './Card.module.scss';
 interface Props {
 	actions?: React.ReactNode;
 	badge?: string;
@@ -15,7 +15,7 @@ export default function Card({ actions, badge, children, image, onClick, subtitl
 	const secondaryColor = theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7];
 
 	return (
-		<div style={{ width: 340, margin: 'auto' }}>
+		<div className={onClick ? styles.cardClickable : ''} style={{ width: 340, margin: 'auto' }}>
 			<MantineCard shadow='sm' p='lg' onClick={onClick}>
 				<MantineCard.Section>
 					<Image src={image} height={160} alt='Norway' />
