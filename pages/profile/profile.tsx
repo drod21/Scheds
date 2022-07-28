@@ -4,7 +4,8 @@ import { supabase } from '../../utils/supabase-client';
 import { TextInput, Button, Group, Box, Grid } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
-export default function Profile({ session }: { session: Session }) {
+export default function Profile() {
+	const session = supabase.auth.session();
 	const form = useForm({
 		initialValues: { firstName: '', lastName: '', username: '' },
 	});
