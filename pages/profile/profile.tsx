@@ -3,49 +3,49 @@ import { TextInput, Button, Group, Box, Grid } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { supabase } from '../../utils/supabase-client';
 import type { Session } from '@supabase/supabase-js';
+import { useUser } from '@supabase/auth-helpers-react';
 
 export default function Profile({ session }: { session: Session }) {
+	const user = useUser();
 	const form = useForm({
 		initialValues: { firstName: '', lastName: '', username: '' },
 	});
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getProfile();
-	}, [session]);
+		async function getProfile() {
+			try {
+				setLoading(true);
+				if (!user) {
+					throw new Error('User not found');
+				}
 
-	async function getProfile() {
-		try {
-			setLoading(true);
-			const user = supabase.auth.user();
-			if (!user) {
-				throw new Error('User not found');
+				let { data, error, status } = await supabase
+					.from('profiles')
+					.select('first_name, last_name, username')
+					.eq('id', user.id)
+					.single();
+
+				if (error && status !== 406) {
+					throw error;
+				}
+
+				if (data) {
+					form.setValues({ ...data, firstName: data.first_name, lastName: data.last_name });
+				}
+			} catch (error) {
+				alert(error.message);
+			} finally {
+				setLoading(false);
 			}
-
-			let { data, error, status } = await supabase
-				.from('profiles')
-				.select('first_name, last_name, username')
-				.eq('id', user.id)
-				.single();
-
-			if (error && status !== 406) {
-				throw error;
-			}
-
-			if (data) {
-				form.setValues({ ...data, firstName: data.first_name, lastName: data.last_name });
-			}
-		} catch (error) {
-			alert(error.message);
-		} finally {
-			setLoading(false);
 		}
-	}
+		getProfile();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [session]);
 
 	async function updateProfile({ firstName, lastName, username }) {
 		try {
 			setLoading(true);
-			const user = supabase.auth.user();
 			if (!user) {
 				throw new Error('User not found');
 			}
@@ -58,9 +58,7 @@ export default function Profile({ session }: { session: Session }) {
 				updated_at: new Date(),
 			};
 
-			let { error } = await supabase.from('profiles').upsert(updates, {
-				returning: 'minimal', // Don't return the value after inserting
-			});
+			let { error } = await supabase.from('profiles').upsert(updates);
 
 			if (error) {
 				throw error;

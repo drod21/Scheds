@@ -4,7 +4,7 @@ import { Button, Grid, Paper, Select, Space, Textarea, TextInput, Title } from '
 import { match } from 'ts-pattern';
 import { supabase } from '../../utils/supabase-client';
 import { Status, Size } from '../../types/enums';
-import type { PostgrestSingleResponse, User } from '@supabase/supabase-js';
+import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 import type { Definitions } from '../../types/database';
 import { updateTask } from '../../services/tasks.service';
 
@@ -67,7 +67,10 @@ export default function Task({ task }: { task: Definitions['tasks'] }) {
 }
 
 export async function getServerSideProps({ req, res, query }) {
-	const { user }: { user: User } = await supabase.auth.api.getUserByCookie(req);
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
+	const { user } = session;
 
 	return pipe(
 		R.fromNullable(user, 'Unauthorized'),

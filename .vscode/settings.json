@@ -1,5 +1,7 @@
 {
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.tsdk": ".\\node_modules\\typescript\\lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

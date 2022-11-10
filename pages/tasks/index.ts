@@ -7,7 +7,10 @@ import type { Definitions } from '../../types/database';
 export { default } from './tasks';
 
 export async function getServerSideProps({ req }: GetServerSidePropsContext) {
-	const { user } = await supabase.auth.api.getUserByCookie(req);
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
+	const { user } = session;
 
 	return pipe(
 		R.fromNullable(user, 'Unauthorized'),

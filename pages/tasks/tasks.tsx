@@ -10,7 +10,12 @@ export default function Tasks({ error, tasks }) {
 
 	const addTask = async e => {
 		e.preventDefault();
-		const userId = supabase.auth.user()?.id;
+		const {
+			data: { session },
+		} = await supabase.auth.getSession();
+		const { user } = session;
+		const userId = user.id;
+
 		await supabase.from('tasks').insert([
 			{
 				size: 'small',

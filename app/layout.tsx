@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { match } from 'ts-pattern';
-import { SessionContextProvider, useSession, useUser } from '@supabase/auth-helpers-react';
+import { useSession, useUser } from '@supabase/auth-helpers-react';
 
-import { supabase } from '../utils/supabase-client';
 import Layout from '../layout';
 import '../styles/globals.scss';
 
@@ -26,11 +25,9 @@ function MyApp({ Component, pageProps }) {
 	}
 
 	return (
-		<SessionContextProvider supabaseClient={supabase}>
-			<Layout authState={authState}>
-				<Component session={session} {...props} />
-			</Layout>
-		</SessionContextProvider>
+		<Layout authState={authState}>
+			<Component session={session} {...props} />
+		</Layout>
 	);
 }
 

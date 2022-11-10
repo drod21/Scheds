@@ -16,7 +16,7 @@ export default function Card({ actions, badge, children, image, onClick, subtitl
 
 	return (
 		<div className={onClick ? styles.cardClickable : ''} style={{ width: 340, margin: 'auto' }}>
-			<MantineCard shadow='sm' p='lg' onClick={onClick}>
+			<MantineCard shadow='sm' onClick={onClick}>
 				<MantineCard.Section>
 					<Image src={image} height={160} alt='Norway' />
 				</MantineCard.Section>

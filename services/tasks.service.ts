@@ -1,7 +1,12 @@
 import { supabase } from '../utils/supabase-client';
 
 export const updateTask = async ({ description, id, name, size, status }) => {
-	const userId = await supabase.auth.user()?.id;
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
+	const {
+		user: { id: userId },
+	} = session;
 	const task = await supabase
 		.from('tasks')
 		.update({

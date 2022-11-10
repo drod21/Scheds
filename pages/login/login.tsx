@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Button, TextInput } from '@mantine/core';
-import { supabase } from '../../utils/supabase-client';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function Login() {
+	const supabaseClient = useSupabaseClient();
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
 
 	const handleLogin = async (email: string) => {
 		try {
 			setLoading(true);
-			const { error } = await supabase.auth.signIn({ email });
+			const { error } = await supabaseClient.auth.signInWithOtp({ email });
 			if (error) throw error;
 			alert('Check your email for the login link!');
 		} catch (error) {
