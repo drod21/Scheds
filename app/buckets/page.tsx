@@ -1,5 +1,4 @@
 import { useRouter } from 'next/navigation';
-import { Button, SimpleGrid, Space } from '@mantine/core';
 import { supabase } from '../../utils/supabase-client';
 import Card from '../../components/card';
 
@@ -12,7 +11,7 @@ export default async function Buckets() {
 	const {
 		data: { session },
 	} = await supabase.auth.getSession();
-	const { user } = session;
+	const user = session?.user;
 
 	const buckets = await pipe(
 		R.fromNullable(user, 'Unauthorized'),
@@ -44,21 +43,22 @@ export default async function Buckets() {
 	return (
 		<div>
 			Add Energy Bucket
-			<SimpleGrid cols={4}>
+			<div className='container'>
 				{/* {isRefreshing ? (
 					<Loader />
 				) : ( */}
-				{buckets?.map((bucket, idx) => (
-					<>
-						<Card onClick={() => router.push(`${bucket.id}`)} key={bucket.id} title={idx.toString()}>
-							{bucket.size}
-						</Card>
-						<Space w='sm' />
-					</>
-				))}
-				{/* )} */}
-			</SimpleGrid>
-			<Button onClick={addBucket}>Add Energy Bucket</Button>
+				<div className='row'>
+					{buckets?.map((bucket, idx) => (
+						<div className='col-3' key={bucket.id}>
+							<Card onClick={() => router.push(`${bucket.id}`)} title={idx.toString()}>
+								{bucket.size}
+							</Card>
+						</div>
+					))}
+					{/* )} */}
+				</div>
+			</div>
+			{/* <button onClick={addBucket}>Add Energy Bucket</button> */}
 		</div>
 	);
 }

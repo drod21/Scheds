@@ -1,4 +1,4 @@
-import { Card as MantineCard, Image, Text, Badge, Group, useMantineTheme } from '@mantine/core';
+import Image from 'next/image';
 import styles from './Card.module.scss';
 interface Props {
 	actions?: React.ReactNode;
@@ -11,30 +11,23 @@ interface Props {
 }
 
 export default function Card({ actions, badge, children, image, onClick, subtitle, title }: Props) {
-	const theme = useMantineTheme();
-	const secondaryColor = theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7];
-
 	return (
 		<div className={onClick ? styles.cardClickable : ''} style={{ width: 340, margin: 'auto' }}>
-			<MantineCard shadow='sm' onClick={onClick}>
-				<MantineCard.Section>
+			<div onClick={onClick}>
+				<section>
 					<Image src={image} height={160} alt='Norway' />
-				</MantineCard.Section>
+				</section>
 
-				<Group position='apart' style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
-					<Text weight={500}>{title}</Text>
-					<Badge color='pink' variant='light'>
-						{badge}
-					</Badge>
-				</Group>
-				<Text size='md'>{subtitle}</Text>
+				<div style={{ marginBottom: 5 }}>
+					<h5>{title}</h5>
+					<div>{badge}</div>
+				</div>
+				<p>{subtitle}</p>
 
-				<Text size='sm' style={{ color: secondaryColor, lineHeight: 1.5 }}>
-					{children}
-				</Text>
+				<p style={{ lineHeight: 1.5 }}>{children}</p>
 
 				{actions}
-			</MantineCard>
+			</div>
 		</div>
 	);
 }
